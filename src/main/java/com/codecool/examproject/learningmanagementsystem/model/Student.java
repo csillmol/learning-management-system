@@ -15,7 +15,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int studentId;
+    private int id;
 
     private String name;
 
@@ -23,7 +23,7 @@ public class Student {
 
     private Date dateOfBirth;
 
-    private int gpa;
+    private Double gpa;
 
     @OneToMany(mappedBy = "student")
     @JsonManagedReference
