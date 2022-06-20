@@ -1,11 +1,11 @@
 package com.codecool.examproject.learningmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
-@Data
 public class Course {
 
     @Id
@@ -13,10 +13,12 @@ public class Course {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_course_subject"))
+//    @JoinColumn(foreignKey = @ForeignKey(name = "fk_course_subject"))
+    @JsonBackReference
     private Subject subject;
 
-    @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_course_student"))
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(foreignKey = @ForeignKey(name = "fk_course_student"))
+    @JsonBackReference
     private Student student;
 }

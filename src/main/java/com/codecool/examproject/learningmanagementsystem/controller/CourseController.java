@@ -3,10 +3,7 @@ package com.codecool.examproject.learningmanagementsystem.controller;
 
 import com.codecool.examproject.learningmanagementsystem.model.Course;
 import com.codecool.examproject.learningmanagementsystem.service.CourseService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +26,15 @@ public class CourseController {
     public Course findById(@PathVariable("id") Long id) {
         return courseService.findById(id);
     }
+
+//    @PostMapping
+//    public Course save(@RequestBody Course course) {
+//        return courseService.save(course);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void deleteCourseById(@PathVariable("id") Long id) {
+//        courseService.deleteCourseById(id);
+//    }
 }
+

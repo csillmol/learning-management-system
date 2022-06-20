@@ -3,10 +3,7 @@ package com.codecool.examproject.learningmanagementsystem.controller;
 
 import com.codecool.examproject.learningmanagementsystem.model.Subject;
 import com.codecool.examproject.learningmanagementsystem.service.SubjectService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +26,14 @@ public class SubjectController {
     public Subject findById(@PathVariable("id") Long id) {
         return subjectService.findById(id);
     }
+
+//    @PostMapping
+//    public Subject save(@RequestBody Subject subject) {
+//        return subjectService.save(subject);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void deleteSubjectById(@PathVariable("id") Long id) {
+//        subjectService.deleteSubjectById(id);
+//    }
 }

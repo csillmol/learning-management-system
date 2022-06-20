@@ -1,15 +1,19 @@
 package com.codecool.examproject.learningmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Data
 @NoArgsConstructor
 public class Subject {
 
@@ -29,7 +33,12 @@ public class Subject {
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Lecturer> lecturer;
 
-    @OneToMany(mappedBy = "subject")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Set<Course> courses;
+
+    public String getName() {
+        return name;
+    }
 }
