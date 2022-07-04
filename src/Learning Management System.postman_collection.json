@@ -1,0 +1,1156 @@
+{
+	"info": {
+		"_postman_id": "cc75cffe-ef16-4331-b4cb-f21bea1f50f5",
+		"name": "Learning Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19629149"
+	},
+	"item": [
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "StudentById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/P5BAHT",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"P5BAHT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StudentByName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/name/Anna Broderick",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"name",
+								"Anna Broderick"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StudentByGpa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/gpa/?gpa=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"gpa",
+								""
+							],
+							"query": [
+								{
+									"key": "gpa",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StudentsAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"console.log(jsonData.length);\r",
+									"pm.collectionVariables.set(\"length\", jsonData.length);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"WP6HTB\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"birthPlace\": \"{{$randomCity}}\",\r\n    \"dateOfBirth\": \"1996-04-05\",\r\n    \"gpa\": 2.9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StudentsAll after POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"List length after POST is increased\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var originalLength = pm.collectionVariables.get(\"length\");\r",
+									"    pm.expect(jsonData.length).to.eql(originalLength+1); \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Students",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/P5BAHT",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"P5BAHT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StudentsAll after DEL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"List length after DEL is decreased\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var originalLength = pm.collectionVariables.get(\"length\");\r",
+									"    pm.expect(jsonData.length).to.eql(originalLength); \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"var moment = require('moment');\r",
+									"pm.environment.set('randomDatePast', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var randomDouble = Math.round(_.random (2,40) * 0.1, 5)\r",
+									"pm.environment.set (\"randomGpa\", randomDouble);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hugh Gates\",\r\n    \"birthPlace\":\"London\",\r\n    \"dateOfBirth\": \"2000-04-05\",\r\n    \"gpa\": 3.2,\r\n    \"course_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/SDN9VG",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"SDN9VG"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.collectionVariables.set(\"entity\", \"students\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "CourseById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CourseBySubjectName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/subject/Introduction to Mathematics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"subject",
+								"Introduction to Mathematics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CourseByLecturerName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/lecturer/Matthew Smith",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"lecturer",
+								"Matthew Smith"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CourseAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"console.log(jsonData.length);\r",
+									"pm.collectionVariables.set(\"length\", jsonData.length);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lecturerName\": \"{{$randomFullName}}\",\r\n    \"lecturerPosition\": \"Instructor\",\r\n    \"subjectId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CourseAll after POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"List length after POST is increased\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var originalLength = pm.collectionVariables.get(\"length\");\r",
+									"    pm.expect(jsonData.length).to.eql(originalLength+1); \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Course",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CourseAll after DEL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"List length after DEL is decreased\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var originalLength = pm.collectionVariables.get(\"length\");\r",
+									"    pm.expect(jsonData.length).to.eql(originalLength); \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"var moment = require('moment');\r",
+									"pm.environment.set('randomDatePast', moment().format((\"YYYY-MM-DD\")));\r",
+									"\r",
+									"var randomDouble = Math.round(_.random (2,40) * 0.1, 5)\r",
+									"pm.environment.set (\"randomGpa\", randomDouble);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lecturerName\": \"{{$randomFullName}}\",\r\n    \"lecturerPosition\": \"Instructor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.collectionVariables.set(\"entity\", \"courses\");",
+							"pm.globals.set(\"length\", 4);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "SubjectById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubjectByExamType",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/exam/MIDTERM_MARK",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"exam",
+								"MIDTERM_MARK"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubjectByCredit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/credit/?credit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"credit",
+								""
+							],
+							"query": [
+								{
+									"key": "credit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubjectAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"console.log(jsonData.length);\r",
+									"pm.collectionVariables.set(\"length\", jsonData.length);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Introduction to {{$randomBsBuzz}} {{$randomBsNoun}}\",\r\n    \"exam\": \"MIDTERM_MARK\",\r\n    \"credit\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubjectAll after POST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"List length after POST is increased\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var originalLength = pm.collectionVariables.get(\"length\");\r",
+									"    pm.expect(jsonData.length).to.eql(originalLength+1); \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subject",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SubjectAll after DEL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"List length after DEL is decreased\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    var originalLength = pm.collectionVariables.get(\"length\");\r",
+									"    pm.expect(jsonData.length).to.eql(originalLength); \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{entity}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Introduction to {{$randomBsBuzz}} {{$randomBsNoun}}\",\r\n    \"exam\": \"MIDTERM_MARK\",\r\n    \"credit\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{entity}}/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{entity}}",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.collectionVariables.set(\"entity\", \"subjects\");",
+							"pm.globals.set(\"length\", 2);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "entity",
+			"value": "students",
+			"type": "string"
+		},
+		{
+			"key": "randomGpa",
+			"value": ""
+		},
+		{
+			"key": "length",
+			"value": "2",
+			"type": "string"
+		}
+	]
+}

@@ -1,20 +1,22 @@
 package com.codecool.examproject.learningmanagementsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.codecool.examproject.learningmanagementsystem.dto.SubjectDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Subject {
 
     @Id
@@ -23,22 +25,21 @@ public class Subject {
 
     private String name;
 
-    private Boolean exam;
-
-    private int hoursPerWeek;
+    @Enumerated(EnumType.STRING)
+    private ExamType exam;
 
     private int credit;
 
-    @ManyToMany(mappedBy = "subjects")
-    @JsonIdentityReference(alwaysAsId = true)
-    private Set<Lecturer> lecturer;
-
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @JsonManagedReference
     private Set<Course> courses;
 
-    public String getName() {
-        return name;
+    public Subject(SubjectDto subjectDto) {
+        this.id = subjectDto.getId();
+        this.name = subjectDto.getName();
+        this.exam = subjectDto.getExam();
+        this.credit = subjectDto.getCredit();
+        this.courses = subjectDto.getCourses();
     }
 }

@@ -1,24 +1,24 @@
 package com.codecool.examproject.learningmanagementsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+import com.codecool.examproject.learningmanagementsystem.dto.StudentDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -28,9 +28,17 @@ public class Student {
 
     private Double gpa;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Set<Course> courses;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "fk_course_student"))
+    @JsonBackReference
+    private Course course;
 
+    public Student(StudentDto studentDto) {
+        this.id = studentDto.getId();
+        this.name = studentDto.getName();
+        this.birthPlace = studentDto.getBirthPlace();
+        this.dateOfBirth = studentDto.getDateOfBirth();
+        this.gpa = studentDto.getGpa();
+        this.course = studentDto.getCourse();
+    }
 }
