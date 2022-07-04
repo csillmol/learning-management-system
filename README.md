@@ -18,7 +18,7 @@ Ez a Spring Boot alkamazás egy tanulónyilvántartó rendszert valósít meg.
 - POST
 - PUT
 - DELETE
-- #### STUDENT
+#### STUDENT
 - GET ByID
 - GET ByName
 - GET ByGpa
